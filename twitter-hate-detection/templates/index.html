@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toxicity & Hate Speech Detector</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        textarea { width: 100%; max-width: 100%; height: 120px; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; margin-top: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+        .clean { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .bad { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .category-list { margin-top: 10px; }
+        .category-item { display: inline-block; margin: 5px; padding: 5px 10px; background: #e9ecef; border-radius: 20px; font-size: 14px; }
+        .score { font-weight: bold; }
+        hr { margin: 20px 0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🔍 Toxicity & Hate Speech Detector</h2>
+    <p>Detects: Hate Speech | Vulgar/Obscene | Threats/Assault | Insults | Toxic Language</p>
+    <textarea id="tweet" placeholder="Paste a tweet or any text here..."></textarea><br>
+    <button onclick="detect()">Analyze</button>
+    <div id="result" style="display:none;" class="result"></div>
+</div>
+
+<script>
+    async function detect() {
+        const text = document.getElementById('tweet').value;
+        if (!text.trim()) {
+            alert("Please enter some text.");
+            return;
+        }
+        const response = await fetch('/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text })
+        });
+        const data = await response.json();
+        const resultDiv = document.getElementById('result');
+        
+        if (data.error) {
+            resultDiv.innerHTML = `<div class="result bad">Error: ${data.error}</div>`;
+            resultDiv.style.display = 'block';
+            return;
+        }
+        
+        let html = '';
+        if (data.prediction === 'CLEAN') {
+            html = `<div class="result clean">
+                        <strong>✅ Prediction: CLEAN</strong><br>
+                        No toxic content detected.
+                    </div>`;
+        } else {
+            html = `<div class="result bad">
+                        <strong>⚠️ Prediction: ${data.prediction}</strong><br>
+                        Confidence: ${(data.confidence * 100).toFixed(2)}%<br>
+                        <div class="category-list">
+                            <strong>Detected categories:</strong><br>`;
+            for (let cat of data.categories) {
+                html += `<span class="category-item">${cat.category} (${(cat.score * 100).toFixed(1)}%)</span>`;
+            }
+            html += `</div></div>`;
+        }
+        
+        resultDiv.innerHTML = html;
+        resultDiv.style.display = 'block';
+    }
+</script>
+</body>
+</html>
