@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import re
+from mangum import Mangum
 
 app = Flask(__name__)
 
@@ -104,3 +105,5 @@ def predict():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
+
+handler = Mangum(app)
