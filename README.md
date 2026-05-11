@@ -1,17 +1,17 @@
-# 🛡️ Twitter Hate Speech Detection
+# Twitter Hate Speech Detection
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A machine learning-powered tool that detects hate speech and offensive content in Twitter (X) tweets in real-time. Built for research, content moderation, and social media analytics.
 
-## ✨ Features
+## Features
 
-- 🔍 Fetch tweets by keyword, hashtag, or user timeline (Twitter API v2)
-- 🧠 Hate speech classification using fine-tuned transformers (e.g., RoBERTa, BERT)
-- 📊 Confidence score for each prediction (hate / offensive / neutral)
-- 🚀 REST API endpoint for batch or single tweet analysis
-- 📁 Export results to CSV / JSON
+-  Fetch tweets by keyword, hashtag, or user timeline (Twitter API v2)
+-  Hate speech classification using fine-tuned transformers (e.g., RoBERTa, BERT)
+-  Confidence score for each prediction (hate / offensive / neutral)
+-  REST API endpoint for batch or single tweet analysis
+-  Export results to CSV / JSON
 
 ## 🛠️ Tech Stack
 
