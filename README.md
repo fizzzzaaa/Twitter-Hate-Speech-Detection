@@ -1,8 +1,5 @@
 # Twitter Hate Speech Detection
 
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 A machine learning-powered tool that detects hate speech and offensive content in Twitter (X) tweets in real-time. Built for research, content moderation, and social media analytics.
 
 ## Features
@@ -13,7 +10,7 @@ A machine learning-powered tool that detects hate speech and offensive content i
 -  REST API endpoint for batch or single tweet analysis
 -  Export results to CSV / JSON
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Python** 3.9+
 - **Tweepy** – Twitter API wrapper
@@ -21,16 +18,16 @@ A machine learning-powered tool that detects hate speech and offensive content i
 - **Flask** / **FastAPI** – API server (optional)
 - **Pandas** – data handling
 
-## 📦 Installation
+##  Installation
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/twitter-hate-detection.git
 cd twitter-hate-detection
 
-# Create virtual environment (optional but recommended)
+
 python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
+source venv/Scripts/activate   
 
 # Install dependencies
 pip install -r requirements.txt
